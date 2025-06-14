@@ -1,0 +1,9 @@
+/home/ameda/Downloads/multi-module-jib/api/src/main/java/com/ameda/api/user/UserRepository.java
+/home/ameda/Downloads/multi-module-jib/api/src/main/java/com/ameda/api/ApiApplication.java
+/home/ameda/Downloads/multi-module-jib/api/src/main/java/com/ameda/api/user/UserResource.java
+/home/ameda/Downloads/multi-module-jib/api/src/main/java/com/ameda/api/user/SwaggerConf.java
+/home/ameda/Downloads/multi-module-jib/api/src/main/java/com/ameda/api/user/UserServiceImpl.java
+/home/ameda/Downloads/multi-module-jib/api/src/main/java/com/ameda/api/user/UserService.java
+/home/ameda/Downloads/multi-module-jib/api/src/main/java/com/ameda/api/user/UserDTO.java
+/home/ameda/Downloads/multi-module-jib/api/src/main/java/com/ameda/api/user/User.java
+/home/ameda/Downloads/multi-module-jib/api/src/main/java/com/ameda/api/user/Address.java
