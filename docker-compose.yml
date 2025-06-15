@@ -1,18 +1,25 @@
-version: '3.8'
-
 services:
   api:
     image: api-service:latest
-#    build:
-#      context: ./api
+    build:
+      context: ./api
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/your_database
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: user
+      SPRING_RABBITMQ_PASSWORD: bitnami
+    networks:
+      - kev-network
 
   db:
     image: postgres:15
@@ -26,6 +33,62 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U root -d your_database" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kev-network
+
+
+  rabbitmq:
+    image: 'bitnami/rabbitmq:3.8'
+    container_name: kevin_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_USERNAME: user
+      RABBITMQ_PASSWORD: bitnami
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/bitnami/scripts/rabbitmq/healthcheck.sh" ]
+      interval: 10s
+      timeout: 5s
+    volumes:
+      - 'rabbit_data:/bitnami'
+    networks:
+      - kev-network
+
+
+
+#  rabbitmq:
+#    image: 'bitnami/rabbitmq:3.8'
+#    container_name: kevin_rabbitmq
+#    ports:
+#      - '5672:5672'
+#      - '15672:15672'
+#    volumes:
+#      - 'rabbit_data:/bitnami'
+#    environment:
+##      - 'RABBITMQ_VHOST=test'
+#      - 'RABBITMQ_USERNAME=user'
+#      - 'RABBITMQ_PASSWORD=bitnami'
+##      - 'RABBITMQ_ERL_COOKIE=abc123'
+#    networks:
+#      - kev-network
+#    healthcheck:
+#          test: [ "CMD-SHELL", "/opt/bitnami/scripts/rabbitmq/healthcheck.sh" ]
+#          interval: 10s
+#          timeout: 5s
+#          retries: 5
+
 
 volumes:
   pgdata:
+  rabbit_data:
+
+networks:
+  kev-network:
+    name: kev-network
+    driver: 'bridge'

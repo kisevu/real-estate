@@ -1,1 +1,2 @@
-com/ameda/shared/MessageUtil.class
+com/ameda/shared/MessagePayload.class
+com/ameda/shared/messagingConfig/RabbitMQConfig.class

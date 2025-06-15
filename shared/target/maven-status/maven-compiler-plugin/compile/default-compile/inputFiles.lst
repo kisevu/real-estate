@@ -1,1 +1,2 @@
-/home/ameda/Downloads/multi-module-jib/shared/src/main/java/com/ameda/shared/MessageUtil.java
+/home/ameda/Downloads/multi-module-jib/shared/src/main/java/com/ameda/shared/MessagePayload.java
+/home/ameda/Downloads/multi-module-jib/shared/src/main/java/com/ameda/shared/messagingConfig/RabbitMQConfig.java

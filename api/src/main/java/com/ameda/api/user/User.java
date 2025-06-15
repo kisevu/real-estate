@@ -1,5 +1,6 @@
 package com.ameda.api.user;
 
+import com.ameda.shared.MessagePayload;
 import jakarta.persistence.*;
 import lombok.*;
 
