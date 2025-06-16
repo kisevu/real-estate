@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h2, h4 { margin: 0; }
+        .header { text-align: center; }
+        .details-table, .items-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .details-table td, .items-table th, .items-table td { border: 1px solid #ccc; padding: 8px; }
+        .items-table th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h2>OSCARIS CATERERS INVOICE</h2>
+    <p>Uthiru, Kiambu county Azzaro Sports Bar and Grill<br/>
+        Phone: (+254) 700903338 | (+254) 798880742</p>
+    <img th:src="'data:image/png;base64,' + ${logo}" alt="Logo" width="150"/>
+
+</div>
+<h4 th:text="${customerName}">Customer</h4>
+
+<table class="details-table">
+    <tr><td>Invoice #</td><td th:text="${invoiceNumber}">INV123</td></tr>
+    <tr><td>Date</td><td th:text="${date}">May 30th, 2025</td></tr>
+    <tr><td>Amount Due</td><td th:text="${amountDue}">ksh.132,000.00</td></tr>
+</table>
+
+<h4>Items</h4>
+<table class="items-table">
+    <thead>
+    <tr><th>Item</th><th>Description</th><th>Unit Cost</th><th>Quantity</th><th>Price</th></tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${}">Catering Services</td>
+        <td>May 2025 invoice</td>
+        <td>sh 1,200.00</td>
+        <td>100 plates</td>
+        <td>kshs 120,000.00</td>
+    </tr>
+    </tbody>
+</table>
+
+<p><strong>Total: </strong>kshs 120,000.00</p>
+</body>
+</html>

@@ -17,6 +17,7 @@
         </processorPath>
         <module name="Scheduler" />
         <module name="api" />
+        <module name="authentication" />
       </profile>
     </annotationProcessing>
   </component>
@@ -24,6 +25,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Scheduler" options="-parameters" />
       <module name="api" options="-parameters" />
+      <module name="authentication" options="-parameters" />
       <module name="shared" options="-parameters" />
     </option>
   </component>

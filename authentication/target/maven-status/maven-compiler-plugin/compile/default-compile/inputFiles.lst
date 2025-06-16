@@ -1,0 +1,12 @@
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/api/RoleApi.java
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/config/SequentialNumberGen.java
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/services/impl/RoleServiceImpl.java
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/services/impl/UserServiceImpl.java
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/services/UserService.java
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/security/JwtAuthConverter.java
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/AuthenticationApplication.java
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/config/KeycloakConfig.java
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/model/NewUser.java
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/services/RoleService.java
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/security/WebSecurityConfig.java
+/home/ameda/Downloads/multi-module-jib/authentication/src/main/java/com/ameda/jib/auth/api/UserAPI.java

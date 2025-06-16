@@ -1,7 +1,6 @@
 package com.ameda.api.messaging;
 
-import com.ameda.api.user.User;
-import com.ameda.shared.MessagePayload;
+
 import com.ameda.shared.messagingConfig.RabbitMQConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: auth-service
+#Below stipulates where the access token gets verified,  inorder to use it as a token for subsequent requests
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${app.keycloak.serverUrl}/realms/${app.keycloak.realm}
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/astute_db
+
+server:
+  port: 6700
+  servlet:
+    context-path: /auth
+  session:
+    cookie:
+      same-site: None
+      secure: true
+
+
+app:
+  keycloak:
+    admin:
+      clientId: admin-cli
+      clientSecret: OFSYa1E3MJjwU6a34XgTb8pyQPLFqKp7
+    realm: spring
+    serverUrl: http://keycloak:8080
+
+
+#    84fb644f99f26f18044ce7d8b142ff32 - mailjet secret key (password)
+#    d1cac44c7267001e3de4076470cdee3e  - mailjet api key  (username)
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: TRACE
