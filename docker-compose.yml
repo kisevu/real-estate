@@ -30,6 +30,14 @@ services:
     networks:
       - kev-network
 
+
+  scheduler:
+    image: scheduler-service:latest
+    ports:
+      - "5500:5500"
+    networks:
+      - kev-network
+
   db:
     image: postgres:15
     container_name: kevin_db
@@ -85,7 +93,7 @@ services:
       KC_DB_USERNAME: root
       KC_DB_PASSWORD: root
       KC_DB_URL: jdbc:postgresql://db:5432/your_database
-      KC_HOSTNAME: localhost
+      KC_HOSTNAME: keycloak
       KC_FEATURES: token-exchange,admin-fine-grained-authz
     #      KC_HTTP_RELATIVE_PATH: /keycloak
     networks:
