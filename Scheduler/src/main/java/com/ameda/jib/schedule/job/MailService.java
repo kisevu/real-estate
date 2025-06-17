@@ -25,7 +25,7 @@ public class MailService {
         this.mailjetClient = mailjetClient;
     }
 
-    public void sendScheduledEmail(String toEmail, String subject, String content) throws Exception {
+    public void sendScheduledEmail( Notification notification ) throws Exception {
         MailjetRequest request = new MailjetRequest(Emailv31.resource)
                 .property(Emailv31.MESSAGES, new JSONArray()
                         .put(new JSONObject()
@@ -34,12 +34,12 @@ public class MailService {
                                         .put("Name", "Scheduler"))
                                 .put(Emailv31.Message.TO, new JSONArray()
                                         .put(new JSONObject()
-                                                .put("Email", toEmail)))
-                                .put(Emailv31.Message.SUBJECT, subject)
-                                .put(Emailv31.Message.TEXTPART, content)));
+                                                .put("Email", notification.getSenderEmail())))
+                                .put(Emailv31.Message.SUBJECT, notification.getSubject())
+                                .put(Emailv31.Message.TEXTPART, notification.getContent())));
 
         MailjetResponse response = mailjetClient.post(request);
-        System.out.println("Status: " + response.getStatus());
-        System.out.println("Response: " + response.getData());
+        log.info(" Status: {}", response.getStatus());
+        log.info(" Response : {}", response.getData());
     }
 }

@@ -16,6 +16,8 @@
     <module>api</module>
     <module>Scheduler</module>
     <module>authentication</module>
+    <module>Company</module>
+    <module>invoice</module>
   </modules>
   <properties>
     <java.version>21</java.version>

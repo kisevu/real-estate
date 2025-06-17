@@ -17,6 +17,7 @@ public class EmailJob implements Job {
 
     private static final Logger log = LoggerFactory.getLogger(EmailJob.class);
 
+
     private final MailService mailService;
 
     public EmailJob(MailService mailService) {
@@ -25,8 +26,16 @@ public class EmailJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        String body = """
+                Payment is due, proceed to invoice  through E-tims
+                """;
+        Notification notification = Notification.builder()
+                .senderEmail("amedakevin@gmail.com")
+                .Subject("")
+                .content(body)
+                .build();
         try{
-            mailService.sendScheduledEmail("amedakevin@gmail.com","Invoice Reminder","Remember to invoice today Kevin!");
+            mailService.sendScheduledEmail(notification);
             log.info(" Successfully executing a job:{}","Job Execution");
         }catch (Exception ex){
             log.error("Job Scheduling was unsuccessful.");

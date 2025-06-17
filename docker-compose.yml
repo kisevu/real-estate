@@ -8,8 +8,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
+#      rabbitmq:
+#        condition: service_healthy
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/your_database
       SPRING_DATASOURCE_USERNAME: root
@@ -37,6 +37,9 @@ services:
       - "5500:5500"
     networks:
       - kev-network
+    environment:
+      MAILJET_API_KEY: ${MAILJET_API_KEY}
+      MAILJET_SECRET_KEY: ${MAILJET_SECRET_KEY}
 
   db:
     image: postgres:15
@@ -99,9 +102,74 @@ services:
     networks:
       - kev-network
 
+  mysql:
+    image: mysql:8.0.40
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_ROOT_PASSWORD: rootPass
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+      - kev-network
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+
+  company:
+    image: company-service:latest
+    container_name: company
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MAILJET_API_KEY: ${MAILJET_API_KEY}
+      MAILJET_SECRET_KEY: ${MAILJET_SECRET_KEY}
+    ports:
+      - "4500:4500"
+    networks:
+      - kev-network
+
+
+  mongo:
+    image: mongo:latest
+    container_name: oscaris
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: invoicedb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - kev-network
+
+  invoice:
+    image: invoice-service:latest
+    container_name: invoice-service
+    depends_on:
+      - mongo
+    environment:
+      SPRING_DATA_MONGODB_URI: ${MONGO_URI}
+    ports:
+      - "8787:8787"
+    networks:
+      - kev-network
+
+
+
 volumes:
   pgdata:
   rabbit_data:
+  mysql_data:
+  mongo-data:
 
 networks:
   kev-network:

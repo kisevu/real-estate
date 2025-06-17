@@ -1,2 +1,3 @@
 com/ameda/shared/MessagePayload.class
 com/ameda/shared/messagingConfig/RabbitMQConfig.class
+com/ameda/shared/swaggerconf/SwaggerConf.class

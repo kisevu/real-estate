@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class QuartzConfig {
 
-
     @Bean
     public JobDetail jobDetail(){
         return JobBuilder.newJob(EmailJob.class)

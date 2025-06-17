@@ -1,0 +1,79 @@
+# ===============================
+# Java & Maven/Gradle Build Artifacts
+# ===============================
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven
+target/
+**/target/
+
+# Gradle
+build/
+**/build/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ IDEA
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# VS Code
+.vscode/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# ===============================
+# Environment & Secret Files
+# ===============================
+.env
+.env.local
+.env.*.local
+
+# Spring Boot Secrets
+application-secrets.properties
+**/application-secrets.properties
+**/application-*.secrets.properties
+
+# Optional: Ignore default application.properties if secrets are embedded there
+# (comment this out if you version non-sensitive configs)
+# application.properties
+# **/application.properties
+
+# ===============================
+# Testing & Reports
+# ===============================
+test-output/
+surefire-reports/
+jacoco.exec
+coverage-report/
+
+# ===============================
+# Dependency Caches
+# ===============================
+.mvn/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===============================
+# Plugin-specific (optional)
+# ===============================
+/plugins/*.jar
+/plugins/output/
