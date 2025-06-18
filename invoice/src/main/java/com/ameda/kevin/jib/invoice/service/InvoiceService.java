@@ -1,7 +1,6 @@
 package com.ameda.kevin.jib.invoice.service;
 
 
-import com.ameda.kevin.jib.invoice.InvSendStats;
 import com.ameda.kevin.jib.invoice.Invoice;
 
 import java.math.BigDecimal;
@@ -18,4 +17,5 @@ public interface InvoiceService {
     byte [] retrieveInvoiceFile(String invoiceId);
     byte [] generateInvoicePdf(String invoiceId);
     List<Invoice> findBySendStats();
+    void updateInvoiceSendStats(String invoiceId);
 }

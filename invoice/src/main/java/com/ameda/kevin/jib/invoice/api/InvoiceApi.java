@@ -45,4 +45,9 @@ public class InvoiceApi {
         List<Invoice> unsentInvoices = invoiceService.findBySendStats();
         return ResponseEntity.status(HttpStatus.OK).body(unsentInvoices);
     }
+
+    @PutMapping("/update/sent/{invoiceId}")
+    public void updateSendStats(@PathVariable  String invoiceId){
+        invoiceService.updateInvoiceSendStats(invoiceId);
+    }
 }

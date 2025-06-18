@@ -71,7 +71,8 @@ public class InvoicePDFGenerator {
      * Stores a PDF invoice into MongoDB GridFS.
      */
     public String storeInvoicePdf(Invoice invoice) throws IOException, DocumentException {
-        byte[] pdfBytes = generateBasic(invoice);
+//        byte[] pdfBytes = generateBasic(invoice);
+        byte[] pdfBytes = this.generateInvoicePdfWithThymeleaf(invoice.getInvoiceId());
         try (ByteArrayInputStream inputStream = new ByteArrayInputStream(pdfBytes)) {
             return gridFsTemplate.store(inputStream, invoice.getInvoiceNumber() + ".pdf", "application/pdf").toString();
         }

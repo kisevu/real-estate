@@ -120,4 +120,17 @@ public class InvoiceServiceImpl implements InvoiceService {
     public List<Invoice> findBySendStats() {
         return invoiceRepository.findBySendStats(InvSendStats.NOT_SENT);
     }
+
+    @Override
+    public void updateInvoiceSendStats(String invoiceId) {
+        Invoice invoice = this.retrieveInvoice(invoiceId);
+        if(Objects.isNull(invoice)){
+            log.info("could not set SENT flag for customer: {}",invoice.getCustomerName());
+            return;
+        } else {
+            invoice.setSendStats(InvSendStats.SENT);
+            invoiceRepository.save(invoice);
+            log.info("Successfully set SENT for customer: {}",invoice.getCustomerName());
+        }
+    }
 }

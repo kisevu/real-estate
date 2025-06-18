@@ -43,6 +43,7 @@ public class GenericQuartzJob implements Job {
                 .stream()
                 .map(invoice -> invoice.getInvoiceId())
                 .toList();
+
         try{
             switch (jobType){
                 case "EMAIL" -> {
@@ -59,6 +60,13 @@ public class GenericQuartzJob implements Job {
                                 .build();
                         mailService.sendScheduledEmail(notification);
                         log.info("Successfully mailed due invoice to the client.");
+                        /*
+                        * update send stats
+                        * */
+                        restClient.put()
+                                .uri("/update/sent/"+id)
+                                .retrieve()
+                                .toBodilessEntity();
                     }
                 }
                 default -> throw new IllegalArgumentException("Unknown job type: "+ jobType);
