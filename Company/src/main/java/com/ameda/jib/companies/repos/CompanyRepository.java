@@ -15,10 +15,10 @@ import java.util.Optional;
 @Repository
 public interface CompanyRepository extends JpaRepository<Company,String> {
 
-    @Query(value = "select * from tbl_companies where company_name=: companyName",nativeQuery = true)
+    @Query(value = "select * from tbl_companies where company_name=:companyName",nativeQuery = true)
     Optional<Company> getCompanyByName(@Param("companyName") String companyName);
 
-    @Query(value = "select * from tbl_companies where company_id=: companyId",nativeQuery = true)
+    @Query(value = "select * from tbl_companies where company_id=:companyId",nativeQuery = true)
     Optional<Company> getCompanyById(@Param("companyId") String companyId);
 
 

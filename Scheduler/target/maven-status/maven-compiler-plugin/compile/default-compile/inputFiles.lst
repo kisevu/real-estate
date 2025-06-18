@@ -1,5 +1,8 @@
+/home/ameda/Downloads/multi-module-jib/Scheduler/src/main/java/com/ameda/jib/schedule/job/GenericQuartzConfig.java
 /home/ameda/Downloads/multi-module-jib/Scheduler/src/main/java/com/ameda/jib/schedule/job/MailJetConfig.java
 /home/ameda/Downloads/multi-module-jib/Scheduler/src/main/java/com/ameda/jib/schedule/job/QuartzConfig.java
+/home/ameda/Downloads/multi-module-jib/Scheduler/src/main/java/com/ameda/jib/schedule/job/GenericQuartzJob.java
+/home/ameda/Downloads/multi-module-jib/Scheduler/src/main/java/com/ameda/jib/schedule/job/Invoice.java
 /home/ameda/Downloads/multi-module-jib/Scheduler/src/main/java/com/ameda/jib/schedule/job/MailService.java
 /home/ameda/Downloads/multi-module-jib/Scheduler/src/main/java/com/ameda/jib/schedule/job/Notification.java
 /home/ameda/Downloads/multi-module-jib/Scheduler/src/main/java/com/ameda/jib/schedule/QuartzServiceApplication.java

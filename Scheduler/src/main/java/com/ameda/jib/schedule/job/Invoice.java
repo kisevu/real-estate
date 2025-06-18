@@ -1,8 +1,6 @@
-package com.ameda.kevin.jib.invoice;
+package com.ameda.jib.schedule.job;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -10,15 +8,13 @@ import java.time.LocalDateTime;
 /**
  * Author: kev.Ameda
  */
-
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(collection = "tbl_invoice")
+@Getter
+@Setter
+
 public class Invoice {
-    @Id
     private String invoiceId;
     private String invoiceNumber;
     private LocalDateTime time;
@@ -26,6 +22,5 @@ public class Invoice {
     private String customerName;
     private String companyId;
     private String pdfFileId;
-    private InvSendStats sendStats;
-
+//    private InvSendStats sendStats;
 }

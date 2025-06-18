@@ -19,14 +19,6 @@
   </properties>
 
   <dependencies>
-<!--    <dependency>-->
-<!--      <groupId>org.springframework.boot</groupId>-->
-<!--      <artifactId>spring-boot-starter-data-jpa</artifactId>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.springframework.boot</groupId>-->
-<!--      <artifactId>spring-boot-starter-mail</artifactId>-->
-<!--    </dependency>-->
     <dependency>
       <groupId>io.github.cdimascio</groupId>
       <artifactId>dotenv-java</artifactId>
@@ -46,12 +38,6 @@
       <artifactId>lombok</artifactId>
       <optional>true</optional>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>com.mysql</groupId>-->
-<!--      <artifactId>mysql-connector-j</artifactId>-->
-<!--      <scope>runtime</scope>-->
-<!--    </dependency>-->
-    <!-- Mailjet SDK -->
     <dependency>
       <groupId>com.mailjet</groupId>
       <artifactId>mailjet-client</artifactId>

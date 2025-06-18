@@ -20,4 +20,5 @@ public class CompanyRequest {
     private int count;
     private Address address;
     private String phoneNumber;
+    private String email;
 }

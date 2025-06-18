@@ -23,6 +23,7 @@ public class Company {
     private String kraPin;
     private String contactPerson;
     private int count;
+    private String email;
     @Embedded
     private Address address;
     private String phoneNumber;

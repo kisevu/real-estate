@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
+
 /**
  * Author: kev.Ameda
  */
@@ -25,7 +27,8 @@ public class MailService {
         this.mailjetClient = mailjetClient;
     }
 
-    public void sendScheduledEmail( Notification notification ) throws Exception {
+    public void sendScheduledEmail( Notification notification) throws Exception {
+        String base64Invoice = Base64.getEncoder().encodeToString(notification.getInvoiceFile());
         MailjetRequest request = new MailjetRequest(Emailv31.resource)
                 .property(Emailv31.MESSAGES, new JSONArray()
                         .put(new JSONObject()
@@ -36,7 +39,14 @@ public class MailService {
                                         .put(new JSONObject()
                                                 .put("Email", notification.getSenderEmail())))
                                 .put(Emailv31.Message.SUBJECT, notification.getSubject())
-                                .put(Emailv31.Message.TEXTPART, notification.getContent())));
+                                .put(Emailv31.Message.TEXTPART, notification.getContent())
+                                .put(Emailv31.Message.ATTACHMENTS, new JSONArray()
+                                        .put(new JSONObject()
+                                                .put("ContentType","application/pdf")
+                                                .put("Filename","invoice.pdf")
+                                                .put("Base64Content", base64Invoice)))
+                        )
+                );
 
         MailjetResponse response = mailjetClient.post(request);
         log.info(" Status: {}", response.getStatus());

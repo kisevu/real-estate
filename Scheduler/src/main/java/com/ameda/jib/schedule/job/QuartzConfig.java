@@ -1,18 +1,17 @@
 package com.ameda.jib.schedule.job;
 
 import org.quartz.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+
 
 /**
  * Author: kev.Ameda
  */
 
 
-@Configuration
+//@Configuration
 public class QuartzConfig {
 
-    @Bean
+//    @Bean
     public JobDetail jobDetail(){
         return JobBuilder.newJob(EmailJob.class)
                 .withIdentity("emailJob")
@@ -20,7 +19,7 @@ public class QuartzConfig {
                 .build();
     }
 
-    @Bean
+//    @Bean
     public Trigger trigger(JobDetail jobDetail){
         return TriggerBuilder.newTrigger()
                 .forJob(jobDetail)

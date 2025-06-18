@@ -36,7 +36,6 @@ public class CompanyServiceImpl  implements CompanyService {
                 .city(addressReq.getCity())
                 .building(addressReq.getBuilding())
                 .build();
-
         Company company = Company.builder()
                 .companyName(request.getCompanyName())
                 .address(address)
@@ -44,6 +43,7 @@ public class CompanyServiceImpl  implements CompanyService {
                 .contactPerson(request.getContactPerson())
                 .phoneNumber(request.getPhoneNumber())
                 .kraPin(request.getKraPin())
+                .email(request.getEmail())
                 .build();
         Company saved = companyRepository.save(company);
         if(!Objects.isNull(saved)){

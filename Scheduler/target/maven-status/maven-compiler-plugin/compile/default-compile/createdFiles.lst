@@ -1,7 +1,12 @@
-com/ameda/jib/schedule/job/Notification.class
 com/ameda/jib/schedule/job/MailJetConfig.class
-com/ameda/jib/schedule/job/EmailJob.class
+com/ameda/jib/schedule/job/Invoice.class
 com/ameda/jib/schedule/job/QuartzConfig.class
-com/ameda/jib/schedule/job/Notification$NotificationBuilder.class
 com/ameda/jib/schedule/QuartzServiceApplication.class
 com/ameda/jib/schedule/job/MailService.class
+com/ameda/jib/schedule/job/Notification.class
+com/ameda/jib/schedule/job/GenericQuartzConfig.class
+com/ameda/jib/schedule/job/GenericQuartzJob.class
+com/ameda/jib/schedule/job/EmailJob.class
+com/ameda/jib/schedule/job/GenericQuartzJob$1.class
+com/ameda/jib/schedule/job/Notification$NotificationBuilder.class
+com/ameda/jib/schedule/job/Invoice$InvoiceBuilder.class

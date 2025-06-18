@@ -40,6 +40,7 @@ services:
     environment:
       MAILJET_API_KEY: ${MAILJET_API_KEY}
       MAILJET_SECRET_KEY: ${MAILJET_SECRET_KEY}
+      MAILJET_SENDER: ${MAILJET_SENDER}
 
   db:
     image: postgres:15

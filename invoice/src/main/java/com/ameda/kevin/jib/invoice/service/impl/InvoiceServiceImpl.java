@@ -1,7 +1,9 @@
 package com.ameda.kevin.jib.invoice.service.impl;
 
 import com.ameda.kevin.jib.invoice.DTOs.Company;
+import com.ameda.kevin.jib.invoice.InvSendStats;
 import com.ameda.kevin.jib.invoice.Invoice;
+import com.ameda.kevin.jib.invoice.exceptions.InvoiceNotFoundException;
 import com.ameda.kevin.jib.invoice.pdf.InvoicePDFGenerator;
 import com.ameda.kevin.jib.invoice.pdf.SequentialNumberGen;
 import com.ameda.kevin.jib.invoice.repository.InvoiceRepository;
@@ -12,9 +14,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -39,20 +43,19 @@ public class InvoiceServiceImpl implements InvoiceService {
         this.sequentialNumberGen = sequentialNumberGen;
         this.invoicePDFGenerator = invoicePDFGenerator;
         this.restClient =  builder
-                .baseUrl("http://company-service:4500/api/companies")
+                .baseUrl("http://company:4500/api/companies")
                 .build();
     }
 
     @Override
-    public void generateInvoice(Invoice invoice) {
+    public void generateInvoice(BigDecimal amountDue, String customerName) {
         Company restResult = restClient.get()
-                .uri("/name/" + invoice.getCustomerName())
+                .uri("/name/" + customerName)
                 .retrieve()
                 .body(Company.class);
 
         if(Objects.isNull(restResult) ){
-            log.info("Company could not be found");
-            log.info("Invoice could not be created for");
+            log.info("Company could not be found | Invoice creation Paused>>");
             return;
         } else {
             log.info("Company found, proceeding to invoice generation...");
@@ -63,9 +66,10 @@ public class InvoiceServiceImpl implements InvoiceService {
                             "-" + String.valueOf(LocalDate.now().getYear())+"-"+
                             restResult.getCompanyName() )
                     .time(ZonedDateTime.now(ZoneId.of("Africa/Nairobi")).toLocalDateTime())
-                    .amountDue(invoice.getAmountDue())
+                    .amountDue(amountDue)
                     .customerName(restResult.getCompanyName())
                     .companyId(restResult.getCompanyId())
+                    .sendStats(InvSendStats.NOT_SENT) // default client send-stats
                     .build();
             Invoice savedInvoice = invoiceRepository.save(invoice1);
             try {
@@ -74,7 +78,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 
                 // Update the invoice with the PDF file ID
                 savedInvoice.setPdfFileId(fileId);
-                invoiceRepository.save(savedInvoice); // persist the update
+                // persist the update
+                invoiceRepository.save(savedInvoice);
 
                 log.info("Saved Invoice with PDF ID: {}", fileId);
             } catch (IOException | DocumentException e) {
@@ -86,13 +91,13 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public void addInvoiceAndEmail(Invoice invoice) {
+
     }
 
     @Override
     public Invoice retrieveInvoice(String invoiceId) {
-
         return invoiceRepository.findById(invoiceId)
-                .orElseThrow();
+                .orElseThrow(()-> new InvoiceNotFoundException("Invoice entry with passed id could not be found."));
     }
 
     @Override
@@ -101,7 +106,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         try {
            return invoicePDFGenerator.retrieveInvoicePdf(invoice.getPdfFileId());
         }catch (IOException ex){
-            log.error("Error occurred: {}",ex.getMessage());
+            log.error("Error occurred retrieving PDF file : {}",ex.getMessage());
         }
         return null;
     }
@@ -109,5 +114,10 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public byte[] generateInvoicePdf(String invoiceId) {
         return null;
+    }
+
+    @Override
+    public List<Invoice> findBySendStats() {
+        return invoiceRepository.findBySendStats(InvSendStats.NOT_SENT);
     }
 }
